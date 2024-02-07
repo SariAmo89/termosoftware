@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Smart Thermostat</h1>
+<hr class="border-bottom border-info mb-4">
+<br>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <h1>Temperatur und Luftfeuchtigkeit:</h1>
+    <br>
+    <div align='center'>
+    <p id="temp"><span id="temp">N/A</span></p>
+    <p id="humidity"><span id="humidity">N/A</span></p>
+</div>
+</div>
+      <script>
+        // Function to update temperature and humidity values
+        function updateValues() {
+            // Make AJAX request to Flask app to get updated temperature and humidity values
+            $.get('/get_values', function(data) {
+                // Check if received data is valid
+                if (data && data.temp != null && data.humidity != null && data.temp !== undefined && data.humidity !== undefined) {
+                    // Update temperature and humidity values in the HTML elements
+                    $('#temp').text('Aktuelle Temperatur: ' + data.temp + ' °C');
+                    $('#humidity').text('Aktuelle Luftfeuchtigkeit: ' + data.humidity + ' %');
+                } else {
+                    // Handle invalid data
+                    console.error('Received invalid data:', data);
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                // Handle AJAX request failure
+                console.error('AJAX request failed:', textStatus, errorThrown);
+            });
+        }
+        setInterval(updateValues, 2000);
+    </script>
+
+<div class="jumbotron jumbotron-fluid">
+    <h1>Geben Sie die gewünschte Temperatur ein:</h1>
+    <br>
+    <div align='center'>
+    <form method="POST" action="/send">
+      <input type="number" name="value" min="0" max="35"> <strong>°C</strong>
+      <input type="submit" value="Bestätigen">
+    </form> 
+</div>
+</div>  
+</body>
+
+
+{% endblock %}

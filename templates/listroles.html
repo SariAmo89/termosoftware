@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<section class="container">
+    <br>
+    <legend class="border-bottom border-info mb-4">{{legend}}</legend>
+    <table class="table table-striped">
+        <tr style="background-color: #5bc0de">
+            {% for heading in headings %}
+            <th scope="col">{{ heading }}</a></th>
+            {% endfor %}
+        </tr>
+    {% for line in table %}
+        <tr>
+        {% for column in line %}
+            <td scope="col">{{ column }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+    </section>
+
+    <div align='right'>
+        <button type="button" class="btn btn-outline-info"><a class="text-dark" style="text-decoration: none" href="{{ url_for('users.role_delete') }}">Role löschen</a></button>
+    </div>
+
+{% endblock %}

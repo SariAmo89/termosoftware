@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Dashboard</h1>
+<hr class="border-bottom border-info mb-4">
+<br>
+<div>
+    <p>Verfügbare Rollen:      <button type="button" class="btn btn-outline-info"><a class="text-dark" style="text-decoration: none" href="{{ url_for('users.listroles') }}">Rolen</a></button></p>
+</div>
+
+<section class="container">
+<br>
+<legend class="border-bottom border-info mb-4">{{legend}}</legend>
+<table class="table table-striped">
+    <tr style="background-color: #5bc0de">
+        {% for heading in headings %}
+        <th scope="col">{{ heading }}
+        </th>
+        {% endfor %}
+    </tr>
+{% for line in table %}
+    <tr>
+    {% for column in line %}
+        <td scope="col">{{ column }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+</section>
+
+<div align='right'>
+    <button type="button" class="btn btn-outline-info"><a class="text-dark" style="text-decoration: none" href="{{ url_for('users.user_delete') }}">User löschen</a></button>
+</div>
+<br>
+<div align='right'>
+    <button type="button" class="btn btn-outline-info"><a class="text-dark" style="text-decoration: none" href="{{ url_for('users.register') }}">User hinzufügen</a></button>
+</div>
+<br>
+
+
+{% endblock %}

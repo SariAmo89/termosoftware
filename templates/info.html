@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Hilfe</h1>
+<hr class="border-bottom border-info mb-4">
+<br>
+  <div class="jumbotron">
+    <h1>Brauchen Sie Hilfe?</h1><br/>
+    <h4>Melden Sie sich per E-Mail an: <strong>firmaCPS@smartThermostat.de</strong></h4>
+    <br>
+    {% if current_user.is_authenticated %}
+    {% else %}
+    <p>Zurück zum <a class="text-info" href="{{ url_for('users.login') }}"><strong>Login</strong></a>.</p>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.js" integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc=" crossorigin="anonymous"></script>    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>Thermostat Software</title>
+  </head>
+
+  <body>
+  <ul class="navbar container fixed-top navbar-light" style="background-color: #5bc0de;">
+    <a href="#"><img src="{{url_for('static',filename="Icon.jpg")}}" width="70" height="45"></a>
+    {% if current_user.is_authenticated %}
+    <li class="nav-link"><a class="text-dark" href="{{ url_for('core.thermostat') }}">Smart Thermostat</a></li>
+    {% if current_user.has_role('Admin') %}
+    <li class="nav-link"><a class="text-dark" href="{{ url_for('users.listusers') }}">Dashboard</a></li>
+      {% endif %}
+    <li class="nav-link"><a class="text-dark" href="{{ url_for('users.account') }}">Konto bearbeiten</a></li>
+    <li class="nav-link"><a class="text-dark" href="{{ url_for('core.info') }}">Hilfe</a></li>
+    <li class="nav-link"><a class="text-dark" href="{{ url_for('users.logout') }}">Log Out</a></li>
+    {% else %}
+    <li class="nav-link"><a class="text-dark" href="{{ url_for('core.info') }}">Hilfe</a></li>
+    {% endif %}
+  </ul>
+
+  <div class="container"><br><br><br><br>
+    {% for categories, message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ categories }}">
+    <button type="button" class="close"
+    data-dismiss="alert">&times;</button>
+    {{ message }}
+    </div>
+    {% endfor %}
+</body>
+
+<br>
+<div class="container">
+  {% block content %}
+
+  {% endblock %}
+</div>
+</html>

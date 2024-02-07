@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+  <form class="form-group" method="POST">
+    {{form.hidden_tag()}}
+    <legend class="border-bottom border-info mb-4">{{legend}}</legend>
+    <div class="form-group">
+      {{form.email.label(class="form-control-label")}}
+      {{form.email(class="form-control form-control-lg")}}
+    </div>
+    <div class="form-group">
+      {{form.password.label(class="form-control-label")}}
+      {{form.password(class="form-control form-control-lg")}}
+    </div>
+    <div class="form-group form-check">
+      {{form.remember_me}}
+      {{form.remember_me.label(class="form-control-label")}} 
+    </div>
+    <div class="form-group">
+      {{form.submit(class="btn btn-outline-info text-dark")}}
+      <a href="#">Password vergessen?</a>
+    </div>
+  </form>
+  <br>
+  <div align='center'> <h4>All Rights Reserverd:</h4> Sara Amorosa, Milana Popović and Claudia Silva</div>
+</div>
+{% endblock %}
